@@ -9,9 +9,11 @@ import ArrowCircleDownOutlinedIcon from "@mui/icons-material/ArrowCircleDownOutl
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { forumData } from "../api";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { PostState } from "../context/Context";
 
 const Singlepost = () => {
-  const [data, setData] = useState(forumData.posts);
+  const { postState, postDispatch } = PostState();
+  const data = postState.posts;
   const { id } = useParams();
 
   const post = data.find((post) => post.postId === id);
@@ -32,9 +34,7 @@ const Singlepost = () => {
       return { ...pos };
     });
 
-    // console.log(updated);
-
-    setData(updated);
+    postDispatch({ type: "FETCH_POSTS", payload: updated });
   };
 
   const handleUpvoteClick = (id) => {
@@ -47,9 +47,7 @@ const Singlepost = () => {
       return { ...pos };
     });
 
-    // console.log(updated);
-
-    setData(updated);
+    postDispatch({ type: "FETCH_POSTS", payload: updated });
   };
 
   const handleDownvoteClick = (id) => {
@@ -64,7 +62,7 @@ const Singlepost = () => {
 
     // console.log(updated);
 
-    setData(updated);
+    postDispatch({ type: "FETCH_POSTS", payload: updated });
   };
 
   return (

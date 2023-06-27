@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Rightbar.css";
 import { forumData } from "../api";
+import { PostState } from "../context/Context";
 
-const Rightbar = ({ state }) => {
-  const { data, setData } = state;
+const Rightbar = () => {
+  const { postState, postDispatch } = PostState();
+  const data = postState.posts;
 
   let currentTime = new Date();
 
@@ -20,13 +22,15 @@ const Rightbar = ({ state }) => {
       return AminutesAgo - BminutesAgo;
     });
 
-    setData(updated);
+    postDispatch({ type: "FETCH_POSTS", payload: updated });
   };
 
   const handleMostUpvote = () => {
     const updated = data.sort((a, b) => b.upvotes - a.upvotes);
 
     console.log(updated);
+
+    postDispatch({ type: "FETCH_POSTS", payload: updated });
   };
 
   return (

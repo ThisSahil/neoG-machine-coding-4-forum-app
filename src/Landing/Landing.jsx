@@ -7,14 +7,14 @@ import Rightbar from "../Rightbar/Rightbar";
 import { forumData } from "../api";
 
 const Landing = () => {
-  const [data, setData] = useState(forumData.posts);
+  // const [data, setData] = useState(forumData.posts);
   return (
     <div>
       <Topbar />
       <div className="homeContainer">
         <Sidebar />
-        <Feed state={{ data, setData }} />
-        <Rightbar state={{ data, setData }} />
+        <Feed />
+        <Rightbar />
       </div>
     </div>
   );

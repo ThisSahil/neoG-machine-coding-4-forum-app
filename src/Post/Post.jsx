@@ -7,10 +7,12 @@ import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined
 import ArrowCircleDownOutlinedIcon from "@mui/icons-material/ArrowCircleDownOutlined";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useNavigate } from "react-router-dom";
-const Post = ({ post, state }) => {
+import { PostState } from "../context/Context";
+const Post = ({ post }) => {
   const navigate = useNavigate();
 
-  const { data, setData } = state;
+  const { postState, postDispatch } = PostState();
+  const data = postState.posts;
 
   // console.log(data);
 
@@ -32,7 +34,7 @@ const Post = ({ post, state }) => {
 
     // console.log(updated);
 
-    setData(updated);
+    postDispatch({ type: "FETCH_POSTS", payload: updated });
   };
 
   const handleUpvoteClick = (id) => {
@@ -47,7 +49,7 @@ const Post = ({ post, state }) => {
 
     // console.log(updated);
 
-    setData(updated);
+    postDispatch({ type: "FETCH_POSTS", payload: updated });
   };
 
   const handleDownvoteClick = (id) => {
@@ -62,7 +64,7 @@ const Post = ({ post, state }) => {
 
     // console.log(updated);
 
-    setData(updated);
+    postDispatch({ type: "FETCH_POSTS", payload: updated });
   };
 
   return (
